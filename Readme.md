@@ -1,6 +1,6 @@
 # ArgoCD
 
-## This repository contains information about how to get started with installation of Argocd and creating your first app using imperative and declarative approach.
+### This repository contains information about how to get started with installation of Argocd and creating your first app using imperative and declarative approach.
 
 ### Create Namespace
 ```bash
@@ -10,7 +10,7 @@ kubectl create namespace argocd
 ```bash
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/v2.11.8/manifests/install.yaml
 ```
-### Install jq if not already
+### Install jq if not installed already
 ```bash
 sudo apt  install jq
 ```
@@ -22,7 +22,7 @@ kubectl get secret argocd-initial-admin-secret -n argocd -o json | jq .data.pass
 ```bash
 kubectl edit svc argocd-server -n argocd
 ```
-### Installing ArgoCD cli
+### Installing ArgoCD CLI
 ### Download the binary wherever you have write permissions
 ```bash
 curl -sSL -o ~/argocd https://github.com/argoproj/argo-cd/releases/download/v2.4.11/argocd-linux-amd64
@@ -84,3 +84,23 @@ data:
 ```bash
 kubectl apply -f declarative/single-app.yml
 ```
+### You can also create a deployment via a helm chart and can also set helm values explicitly
+```bash
+argocd app create nginx \
+--repo https://charts.bitnami.com/bitnami \
+--helm-chart nginx \
+--revision 12.0.3 \
+--values-literal-file values.yaml \
+--helm-set service.type=NodePort \
+--dest-namespace devops-tools \
+--dest-server https://kubernetes.default.svc
+```
+
+### To create new user use below command
+```bash
+kubectl -n argocd patch configmap argocd-cm --patch='{"data":{"accounts.arpit": "apiKey,login"}}'
+argocd account list
+argocd account update-password--account arpit
+```
+
+### By default new users do not have any access, read rbac documentation for more details

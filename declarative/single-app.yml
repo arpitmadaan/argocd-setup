@@ -16,7 +16,7 @@ spec:
   destination:
     server: https://kubernetes.default.svc
     namespace: solar-system
-
+# sync strategies
   syncPolicy:
     syncOptions:
       - CreateNamespace=true  
