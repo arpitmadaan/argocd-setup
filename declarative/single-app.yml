@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: solar-system-app
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/arpitmadaan/argocd-setup.git
+    targetRevision: HEAD
+    path: ./declarative/manifests/solar-system
+   
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: solar-system
+
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true  
+    automated:
+      prune: false
+      selfHeal: true
