@@ -11,7 +11,7 @@ spec:
   source:
     repoURL: https://github.com/arpitmadaan/argocd-setup.git
     targetRevision: HEAD
-    path: ./declarative/manifests/solar-system
+    path: ./manifests/solar-system
    
   destination:
     server: https://kubernetes.default.svc
