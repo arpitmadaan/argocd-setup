@@ -1,6 +1,6 @@
 # ArgoCD Exercise
 
-#### What is the need of GitOps?
+### What is the need of GitOps?
 
 If you are working in a devops setup, whenever there is a change in application code, the new image is pushed to the docker registry via CI pipeline which is referenced with its tag in kubernetes deployment file.
 
@@ -14,7 +14,7 @@ This can create the following problems:
 
 Gitops solves these problems by following a pull based model, where a GitOps operator will consistently check the state of Kubernetes cluster and match it with the desired state of git repository.
 
-#### Advantages of GitOps:
+### Advantages of GitOps:
 - Single source of truth
 - Everything as a code including configuration, network, storage, policies etc.
 - Continuous Deployment
@@ -22,10 +22,10 @@ Gitops solves these problems by following a pull based model, where a GitOps ope
 - Auditable
 - Multi Cluster Deployments
 
-#### Drawback of GitOps:
+### Drawback of GitOps:
 - Secret management is complex and another overhead which was not the case in devops.
 
-#### Lets do a hands on exercise to get started with installation of ArgoCD and create our first app using different approaches:
+### Lets do a hands on exercise to get started with installation of ArgoCD and create our first app using different approaches:
 
 1. Create the Namespace:
 ```bash
