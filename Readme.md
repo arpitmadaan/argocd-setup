@@ -1,8 +1,7 @@
 # ArgoCD Exercise
 
+#### What is the need of GitOps?
 
-
-What is the need of GitOps?
 If you are working in a devops setup, whenever there is a change in application code, the new image is pushed to the docker registry via CI pipeline which is referenced with its tag in kubernetes deployment file.
 
 Along with this change, you also have to change the kubernetes config maps, pvc, services etc accordingly and push it manually via kubectl or helm commands. And then you also push the configuration code to remote git repository.
@@ -13,9 +12,9 @@ This can create the following problems:
 - No method of disaster recovery, if the config code was not pushed to git.
 - Users or the CI pipeline have direct write access to the cluster.
 
-Gitops solve these problems by following a pull based model, where a gitops operator will consistently check the state of Kubernetes cluster and match it with the desired state of git repository.
+Gitops solves these problems by following a pull based model, where a GitOps operator will consistently check the state of Kubernetes cluster and match it with the desired state of git repository.
 
-Advantages of GitOps:
+#### Advantages of GitOps:
 - Single source of truth
 - Everything as a code including configuration, network, storage, policies etc.
 - Continuous Deployment
@@ -23,10 +22,10 @@ Advantages of GitOps:
 - Auditable
 - Multi Cluster Deployments
 
-Drawback of GitOps:
+#### Drawback of GitOps:
 - Secret management is complex and another overhead which was not the case in devops.
 
-#### Lets do a hands on exercise to get started with installation of Argocd and create our first app using different approaches:
+#### Lets do a hands on exercise to get started with installation of ArgoCD and create our first app using different approaches:
 
 1. Create the Namespace:
 ```bash
@@ -72,6 +71,7 @@ username: admin
 password
 ```
 11. Now we will create our first app via CLI, which will be added in default Project with no restrictions. Use the following command and replace your git repository:
+
 We need to create namespace 'solar-system' for the app as well, or use another existing namespace
 ```bash
 argocd app create solar-system-app-2 \
@@ -87,7 +87,7 @@ argocd app sync solar-system-app-2
 ```
 This is how the UI of ArgoCD should look like:
 ![ArgoCD Dashboard](argocd.png)
-13. We can check the app is running or not in the browser:
+13. We can check the app solar-system is running or not in the browser:
 ```bash
 http://<node-name-or-ip>:<port-number>
 ```
