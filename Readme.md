@@ -2,15 +2,16 @@
 
 ### What is the need of GitOps?
 
-If you are working in a devops setup, whenever there is a change in application code, the new image is pushed to the docker registry via CI pipeline which is referenced with its tag in kubernetes deployment file.
+In a DevOps setup, whenever your application code changes, the new Docker image gets pushed to the registry via your CI pipeline, and the Kubernetes deployment file is updated with the new image tag. Sounds simple enough, right?
 
-Along with this change, you also have to change the kubernetes config maps, pvc, services etc accordingly and push it manually via kubectl or helm commands. And then you also push the configuration code to remote git repository.
+But then comes the tricky part: updating config maps, persistent volume claims (PVCs), services, and other Kubernetes resources. Often, these changes are applied manually using kubectl or Helm commands, and you may push this configuration to a remote Git repository... sometimes.
 
-This can create the following problems:
-- Configuration drift due to manual changes which are not recorded on git.
-- There is no testing or review of configuration code.
-- No method of disaster recovery, if the config code was not pushed to git.
-- Users or the CI pipeline have direct write access to the cluster.
+This manual process can lead to big problems:
+
+- Configuration Drift: Manual changes aren’t always recorded in Git, leading to discrepancies between your cluster and your source of truth.
+- No Testing or Review: Config changes applied directly to the cluster are often not reviewed or tested.
+- No Disaster Recovery: What happens if your config wasn't pushed to Git? Recovery becomes a nightmare.
+- Direct Cluster Access: CI pipelines or users often get direct write access to the cluster, increasing risk.
 
 Gitops solves these problems by following a pull based model, where a GitOps operator will consistently check the state of Kubernetes cluster and match it with the desired state of git repository.
 
